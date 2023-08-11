@@ -3,12 +3,12 @@
 <div layout:fragment="content" th:style="${'width : 65%;margin : auto auto'}">
   <h1 th:style="${'text-align : center;margin-bottom:40px'}" th:text="${categories.size()==0} ? 'There is no categories yet' : 'All Categories'"></h1>
   <button th:class="${'btn mb-4 btn-outline-success'}" th:text="${'Add Category'}" th:attr="data-target=${'#addCategory'}" data-toggle="modal"></button>
-  <div class="modal fade" th:attr="id=${'addCategory'}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" th:attr="id=${'addCategory'}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <form th:action="${'/createCategory'}" th:method="${'POST'}">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel" th:text="${'ADD NEW CATEGORY'}"></h5>
+            <h5 class="modal-title" id="exampleModalLabel1" th:text="${'ADD NEW CATEGORY'}"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -34,7 +34,7 @@
       <button th:class="${'btn btn-primary'}" th:text="${'Edit'}" th:attr="data-target=${'#updateCategory'+category.id}" data-toggle="modal"></button>
       <div class="modal fade" tabindex="-1" th:attr="id=${'updateCategory'+category.id}" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <form th:action="${'/updateCategory'}" th:method="${'POST'}">
+          <form th:action="${'/updateCategory/'+category.id}" th:method="${'POST'}">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="e" th:text="${'You are updating this category'}"></h5>
@@ -44,7 +44,7 @@
               </div>
               <div class="modal-body">
                 <div class="form-group">
-                  <label for="new_category_name" th:text="${'CATEGORY NAME :'}"></label>
+                  <label for="new_category_name" th:text="${'NEW CATEGORY NAME :'}"></label>
                   <input type="text" class="form-control" id="new_category_name" name="name" th:value="${category.name}" required th:placeholder="${'New Category Name'}">
                 </div>
                 <div class="modal-footer">

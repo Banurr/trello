@@ -144,10 +144,9 @@ public class HomeController {
         return "redirect:/allcategories/";
     }
 
-    @PostMapping("/updateCategory")
-    public String updateCategory(TaskCategory taskCategory){
-        System.out.println("updated");
-        System.out.println(taskCategory.getName());
+    @PostMapping("/updateCategory/{id}")
+    public String updateCategory(@PathVariable(name = "id") Long id,
+                                 TaskCategory taskCategory){
         taskCategoryService.updateCategory(taskCategory);
         return "redirect:/allcategories/";
     }
