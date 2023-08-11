@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<div layout:fragment="content" th:style="${'width : 95%;margin : auto auto'}">
+  <button th:class="${'btn btn-outline-success mt-3 mb-3'}" th:text="${'+ New Folder'}" th:attr="data-target=${'#addFolder'}" data-toggle="modal"></button>
+  <div class="modal fade" th:attr="id=${'addFolder'}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form th:action="${'/addFolder'}" th:method="${'POST'}">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" th:text="${'ADD NEW FOLDER'}"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="folder_name" th:text="${'FOLDER NAME :'}"></label>
+            <input type="text" class="form-control" id="folder_name" name="name" required th:placeholder="${'Folder Name'}">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="${'CLOSE'}"></button>
+          <button class="btn btn-success" th:text="${'ADD FOLDER'}"></button>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+  <div th:class="${'alert alert-info'}" role="alert" th:style="${folders.size()!=0} ? 'display : none;width : 60%;margin : auto auto' : 'display : block;width : 60%;margin : auto auto'">
+    There is no folders yet , try to add new one!
+  </div>
+    <div class="card mb-3" th:each="folder : ${folders}">
+      <div th:class="${'card-header'}"></div>
+      <div class="card-body">
+        <h3 class="card-title" th:text="${folder.name}"></h3>
+        <a th:href="${'/folder/'+folder.id}" class="btn btn-primary" th:text="${'Details'}"></a>
+      </div>
+    </div>
+</div>
+</html>
